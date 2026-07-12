@@ -86,7 +86,7 @@ if (isset($_GET['logout'])) {
         <button type="submit" name="login" class="btn btn-primary btn-full">Ingresar</button>
     </form>
     <p style="text-align:center;margin-top:20px;font-size:0.8rem;color:#999;">
-        <a href="../index.php" style="color:var(--color-secondary);">&larr; Volver a la tienda</a>
+        <a href="../index.html" style="color:var(--color-secondary);">&larr; Volver a la tienda</a>
     </p>
 </div>
 <?php else: ?>
@@ -95,7 +95,7 @@ if (isset($_GET['logout'])) {
         <div class="header-content">
             <a href="index.php" style="font-weight:700;"><i class="fas fa-candy-cane"></i> Admin LUISICHOCOLATES</a>
             <div style="display:flex;gap:20px;align-items:center;">
-                <a href="../index.php" target="_blank"><i class="fas fa-store"></i> Ver Tienda</a>
+                <a href="../index.html" target="_blank"><i class="fas fa-store"></i> Ver Tienda</a>
                 <a href="?logout=1"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
             </div>
         </div>
