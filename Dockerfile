@@ -8,6 +8,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     && docker-php-ext-install -j$(nproc) pdo pdo_mysql pdo_sqlite zip \
     && a2enmod rewrite \
+    && a2dismod mpm_prefork || true \
+    && ls -la /etc/apache2/mods-enabled/mpm_* || echo "NO MPM FILES" \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
