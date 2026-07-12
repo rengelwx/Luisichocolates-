@@ -19,6 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
         cargarTodosProductos(e.target.value);
     });
 
+    document.querySelector('.filtro-btn[data-categoria=""]')?.addEventListener('click', function() {
+        document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        cargarTodosProductos(document.getElementById('searchInput').value, '');
+    });
+
     document.getElementById('menuToggle')?.addEventListener('click', () => {
         document.querySelector('.nav').classList.toggle('open');
     });
