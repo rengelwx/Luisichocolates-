@@ -17,8 +17,8 @@ if ($uri !== '/' && file_exists(__DIR__ . $uri)) {
         'woff' => 'font/woff',
         'woff2' => 'font/woff2',
         'ttf' => 'font/ttf',
-        'eot' => 'application/vnd.ms-fontobject',
-        'sql' => 'application/octet-stream',
+        'html' => 'text/html',
+        'htm' => 'text/html',
     ];
     if (isset($mimeTypes[$ext])) {
         header('Content-Type: ' . $mimeTypes[$ext]);
@@ -36,4 +36,5 @@ if (file_exists(__DIR__ . $uri)) {
     return false;
 }
 
-require __DIR__ . $uri;
+http_response_code(404);
+echo 'Not Found';
