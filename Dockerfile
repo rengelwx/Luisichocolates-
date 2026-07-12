@@ -13,12 +13,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 COPY . /var/www/html/
 COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
+COPY docker/start.sh /usr/local/bin/start.sh
 
-RUN chown -R www-data:www-data /var/www/html \
+RUN chmod +x /usr/local/bin/start.sh \
+    && chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html \
     && mkdir -p /var/www/html/uploads /var/www/html/data \
     && chown -R www-data:www-data /var/www/html/uploads /var/www/html/data
 
 EXPOSE 80
 
-CMD ["apache2-foreground"]
+CMD ["/usr/local/bin/start.sh"]
