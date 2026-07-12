@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/var/www/html/data
+      - ./uploads:/var/www/html/uploads
+    environment:
+      - SQLITE_PATH=/var/www/html/data/database.sqlite
+    restart: unless-stopped
+
+  # Para desarrollo local con PostgreSQL (opcional)
+  # postgres:
+  #   image: postgres:16-alpine
+  #   environment:
+  #     POSTGRES_DB: chocolatier
+  #     POSTGRES_USER: chocolatier
+  #     POSTGRES_PASSWORD: chocolatier123
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+
+# volumes:
+#   postgres_data:

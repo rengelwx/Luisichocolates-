@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocolatier Artesanal - Bombones de Chocolate</title>
+    <meta name="description" content="Bombones de chocolate artesanales, calidad premium. Descubre nuestra selección de chocolates finos.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <i class="fas fa-candy-cane"></i>
+                    <span>Chocolatier</span>
+                </a>
+                <nav class="nav">
+                    <a href="#productos">Productos</a>
+                    <a href="#destacados">Destacados</a>
+                    <a href="#nosotros">Nosotros</a>
+                    <a href="#contacto">Contacto</a>
+                </nav>
+                <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="heroSection">
+        <div class="hero-slider" id="heroSlider"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Chocolate Artesanal<br><span>Hecho con Pasión</span></h1>
+                <p>Descubre nuestra colección de bombones y chocolates artesanales, elaborados con los mejores ingredientes para los paladares más exigentes.</p>
+                <div class="hero-buttons">
+                    <a href="#productos" class="btn btn-primary">Ver Productos</a>
+                    <a href="#destacados" class="btn btn-secondary">Destacados</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slider-dots" id="sliderDots"></div>
+    </section>
+
+    <!-- Productos Destacados -->
+    <section id="destacados" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Productos Destacados</h2>
+                <p>Nuestra selección especial para ti</p>
+            </div>
+            <div class="product-grid" id="productosDestacados">
+            </div>
+        </div>
+    </section>
+
+    <!-- Filtros -->
+    <section id="productos" class="section section-gray">
+        <div class="container">
+            <div class="section-header">
+                <h2>Todos los Productos</h2>
+                <p>Explora nuestro catálogo completo</p>
+            </div>
+            <div class="filtros">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar productos...">
+                </div>
+                <div class="categoria-filtros" id="categoriaFiltros">
+                    <button class="filtro-btn active" data-categoria="">Todos</button>
+                </div>
+            </div>
+            <div class="product-grid" id="todosProductos">
+            </div>
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Cargando productos...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nosotros -->
+    <section id="nosotros" class="section">
+        <div class="container">
+            <div class="nosotros-grid">
+                <div class="nosotros-content">
+                    <h2>Nuestra Historia</h2>
+                    <p>Somos una chocolatería artesanal apasionada por crear experiencias únicas a través del chocolate. Cada pieza es elaborada cuidadosamente con ingredientes seleccionados.</p>
+                    <p>Utilizamos cacao de origen, manteca de cacao pura y los mejores ingredientes naturales para garantizar un sabor inigualable en cada bocado.</p>
+                    <div class="valores">
+                        <div class="valor">
+                            <i class="fas fa-seedling"></i>
+                            <h4>Ingredientes Naturales</h4>
+                        </div>
+                        <div class="valor">
+                            <i class="fas fa-hand-holding-heart"></i>
+                            <h4>Hecho a Mano</h4>
+                        </div>
+                        <div class="valor">
+                            <i class="fas fa-award"></i>
+                            <h4>Calidad Premium</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="nosotros-image">
+                    <img src="https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=600" alt="Chocolate artesanal" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="section section-brown">
+        <div class="container">
+            <div class="section-header">
+                <h2>Contacto</h2>
+                <p>Háblanos de tu pedido especial</p>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:24px;">
+                <div class="contacto-redes">
+                    <h3>Síguenos</h3>
+                    <div class="social-links-contacto">
+                        <a href="#" aria-label="Facebook" class="social-icon"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="WhatsApp" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" aria-label="TikTok" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 LUISICHOCOLATES. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

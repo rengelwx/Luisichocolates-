@@ -1,0 +1,12 @@
+.git
+.gitignore
+database.sqlite
+data/*.sqlite
+uploads/*
+*.log
+.DS_Store
+node_modules
+vendor
+*.md
+*.txt
+docker-compose.yml
