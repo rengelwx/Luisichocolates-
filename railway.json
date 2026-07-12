@@ -4,8 +4,8 @@
     "dockerfilePath": "Dockerfile"
   },
   "deploy": {
-    "startCommand": "apache2-foreground",
-    "healthcheckPath": "/",
-    "healthcheckTimeout": 100
+    "startCommand": "sh -c \"php -S 0.0.0.0:${PORT:-80} router.php\"",
+    "healthcheckPath": "/index.html",
+    "healthcheckTimeout": 300
   }
 }
