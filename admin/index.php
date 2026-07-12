@@ -530,7 +530,7 @@ if (isset($_GET['logout'])) {
                 <div class="form-group form-group-checkbox">
                     <label>
                         <input type="checkbox" name="precio_a_convenir" id="f_precio_a_convenir" value="1" onchange="togglePrecio()">
-                        Precio a convenir
+                        Para más información contacte al vendedor
                     </label>
                 </div>
                 <div class="form-group">
@@ -789,7 +789,8 @@ document.getElementById('productoForm').addEventListener('submit', async (e) => 
 async function cargarProductosAdmin() {
     try {
         const res = await fetch(API_PROD + '?all=1');
-        const productos = await res.json();
+        const data = await res.json();
+        const productos = Array.isArray(data) ? data : (data.productos || []);
         const tbody = document.getElementById('adminProductos');
         tbody.innerHTML = productos.map(p => `
             <tr>

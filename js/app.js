@@ -16,13 +16,17 @@ document.addEventListener('DOMContentLoaded', () => {
     cargarTodosProductos();
 
     document.getElementById('searchInput')?.addEventListener('input', (e) => {
-        cargarTodosProductos(e.target.value);
+        cargarTodosProductos(e.target.value, '');
     });
 
     document.querySelector('.filtro-btn[data-categoria=""]')?.addEventListener('click', function() {
         document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
         this.classList.add('active');
         cargarTodosProductos(document.getElementById('searchInput').value, '');
+    });
+
+    document.getElementById('verMasBtn')?.addEventListener('click', () => {
+        cargarTodosProductos('', '', true);
     });
 
     document.getElementById('menuToggle')?.addEventListener('click', () => {
@@ -213,10 +217,16 @@ async function cargarCategorias() {
     }
 }
 
+const ITEMS_PER_PAGE = 6;
+let currentPage = 0;
+let currentSearch = '';
+let currentCategoria = '';
+
 async function cargarProductosDestacados() {
     try {
         const res = await fetch(`${API.productos}?destacado=1&limit=3`);
-        const productos = await res.json();
+        const data = await res.json();
+        const productos = Array.isArray(data) ? data : (data.productos || []);
         const grid = document.getElementById('productosDestacados');
         grid.innerHTML = productos.map(p => crearCard(p)).join('');
     } catch (e) {
@@ -224,19 +234,40 @@ async function cargarProductosDestacados() {
     }
 }
 
-async function cargarTodosProductos(search = '', categoria = '') {
+async function cargarTodosProductos(search = '', categoria = '', append = false) {
     const loading = document.getElementById('loading');
     loading?.classList.add('active');
 
+    if (!append) {
+        currentPage = 0;
+        currentSearch = search;
+        currentCategoria = categoria;
+    }
+
     try {
-        let url = API.productos + '?';
-        if (search) url += `&search=${encodeURIComponent(search)}`;
-        if (categoria) url += `&categoria=${encodeURIComponent(categoria)}`;
+        const offset = currentPage * ITEMS_PER_PAGE;
+        let url = `${API.productos}?limit=${ITEMS_PER_PAGE}&offset=${offset}`;
+        if (currentSearch) url += `&search=${encodeURIComponent(currentSearch)}`;
+        if (currentCategoria) url += `&categoria=${encodeURIComponent(currentCategoria)}`;
 
         const res = await fetch(url);
-        const productos = await res.json();
+        const data = await res.json();
+        const productos = Array.isArray(data) ? data : (data.productos || []);
+        const total = data.total ?? productos.length;
         const grid = document.getElementById('todosProductos');
-        grid.innerHTML = productos.map(p => crearCard(p)).join('');
+
+        if (append) {
+            grid.innerHTML += productos.map(p => crearCard(p)).join('');
+        } else {
+            grid.innerHTML = productos.map(p => crearCard(p)).join('');
+        }
+
+        currentPage++;
+
+        const verMasBtn = document.getElementById('verMasBtn');
+        if (verMasBtn) {
+            verMasBtn.style.display = (currentPage * ITEMS_PER_PAGE < total) ? 'inline-block' : 'none';
+        }
     } catch (e) {
         console.error('Error cargando productos:', e);
     } finally {

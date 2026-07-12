@@ -46,11 +46,23 @@ switch ($method) {
             $params[':search2'] = '%' . $_GET['search'] . '%';
         }
 
+        $countSql = str_replace("SELECT p.*, c.nombre as categoria_nombre", "SELECT COUNT(*) as total", $sql);
+        $countStmt = $db->prepare($countSql);
+        foreach ($params as $key => $val) {
+            $countStmt->bindValue($key, $val, is_int($val) ? SQLITE3_INTEGER : SQLITE3_TEXT);
+        }
+        $countStmt->execute();
+        $total = (int)$countStmt->fetchArray()['total'];
+
         $sql .= " ORDER BY p.destacado DESC, p.created_at DESC";
 
         if (isset($_GET['limit'])) {
             $sql .= " LIMIT :limit";
             $params[':limit'] = (int)$_GET['limit'];
+        }
+        if (isset($_GET['offset'])) {
+            $sql .= " OFFSET :offset";
+            $params[':offset'] = (int)$_GET['offset'];
         }
 
         $stmt = $db->prepare($sql);
@@ -59,7 +71,7 @@ switch ($method) {
         }
         $stmt->execute();
 
-        jsonResponse($stmt->fetchAll());
+        jsonResponse(['productos' => $stmt->fetchAll(), 'total' => $total]);
         break;
 
     case 'POST':
