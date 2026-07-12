@@ -8,8 +8,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     && docker-php-ext-install -j$(nproc) pdo pdo_mysql pdo_sqlite zip \
     && a2enmod rewrite \
-    && a2dismod -f mpm_event \
-    && a2enmod mpm_prefork \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
