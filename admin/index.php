@@ -107,7 +107,6 @@ if (isset($_GET['logout'])) {
         <button class="admin-tab active" onclick="switchTab('productos')"><i class="fas fa-box"></i> Productos</button>
         <button class="admin-tab" onclick="switchTab('hero')"><i class="fas fa-image"></i> Hero</button>
         <button class="admin-tab" onclick="switchTab('nosotros')"><i class="fas fa-info-circle"></i> Nosotros</button>
-        <button class="admin-tab" onclick="switchTab('footer')"><i class="fas fa-shoe-prints"></i> Footer</button>
         <button class="admin-tab" onclick="switchTab('redes')"><i class="fas fa-share-alt"></i> Redes</button>
         <button class="admin-tab" onclick="switchTab('general')"><i class="fas fa-cog"></i> General</button>
         <button class="admin-tab" onclick="switchTab('valores')"><i class="fas fa-star"></i> Valores</button>
@@ -211,25 +210,6 @@ if (isset($_GET['logout'])) {
         </div>
     </div>
 
-    <!-- FOOTER -->
-    <div class="tab-content" id="tab-footer">
-        <div class="config-card">
-            <h3><i class="fas fa-shoe-prints"></i> Sección Footer</h3>
-            <div class="form-group">
-                <label>Descripción del sitio</label>
-                <textarea id="cfg_footer_footer_descripcion" rows="3"></textarea>
-            </div>
-            <div class="form-group">
-                <label>Texto de copyright</label>
-                <input type="text" id="cfg_footer_footer_copyright">
-            </div>
-            <div class="save-row">
-                <span class="save-msg" id="msg-footer"></span>
-                <button class="btn btn-primary" onclick="saveConfig('footer')"><i class="fas fa-save"></i> Guardar</button>
-            </div>
-        </div>
-    </div>
-
     <!-- REDES -->
     <div class="tab-content" id="tab-redes">
         <div class="config-card">
@@ -266,8 +246,8 @@ if (isset($_GET['logout'])) {
                 <input type="text" id="cfg_general_site_nombre">
             </div>
             <div class="form-group">
-                <label>Descripción del sitio (meta description)</label>
-                <textarea id="cfg_general_site_descripcion" rows="2"></textarea>
+                <label>Texto de copyright</label>
+                <input type="text" id="cfg_general_footer_copyright">
             </div>
             <div class="form-group">
                 <label>Tipo de logo</label>
@@ -591,10 +571,6 @@ async function loadAllConfig() {
             document.getElementById('cfg_nosotros_texto1').value = cfg.nosotros.nosotros_texto1 || '';
             document.getElementById('cfg_nosotros_texto2').value = cfg.nosotros.nosotros_texto2 || '';
         }
-        if (cfg.footer) {
-            document.getElementById('cfg_footer_footer_descripcion').value = cfg.footer.footer_descripcion || '';
-            document.getElementById('cfg_footer_footer_copyright').value = cfg.footer.footer_copyright || '';
-        }
         if (cfg.redes) {
             document.getElementById('cfg_redes_redes_facebook').value = cfg.redes.redes_facebook || '';
             document.getElementById('cfg_redes_redes_instagram').value = cfg.redes.redes_instagram || '';
@@ -603,7 +579,7 @@ async function loadAllConfig() {
         }
         if (cfg.general) {
             document.getElementById('cfg_general_site_nombre').value = cfg.general.site_nombre || '';
-            document.getElementById('cfg_general_site_descripcion').value = cfg.general.site_descripcion || '';
+            document.getElementById('cfg_general_footer_copyright').value = cfg.general.footer_copyright || '';
             document.getElementById('cfg_general_logo_icon').value = cfg.general.logo_icon || '';
             document.getElementById('cfg_general_btn_primary').value = cfg.general.btn_primary || '';
             document.getElementById('cfg_general_logo_tipo').value = cfg.general.logo_tipo || 'icon';
@@ -1137,7 +1113,7 @@ async function saveGeneral() {
     const msg = document.getElementById('msg-general');
     const campos = [
         { key: 'site_nombre', value: document.getElementById('cfg_general_site_nombre').value },
-        { key: 'site_descripcion', value: document.getElementById('cfg_general_site_descripcion').value },
+        { key: 'footer_copyright', value: document.getElementById('cfg_general_footer_copyright').value },
         { key: 'logo_tipo', value: document.getElementById('cfg_general_logo_tipo').value },
         { key: 'logo_icon', value: document.getElementById('cfg_general_logo_icon').value },
         { key: 'logo_url', value: document.getElementById('cfg_general_logo_url').value },

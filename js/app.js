@@ -135,8 +135,10 @@ async function loadSiteConfig() {
         if (cfg.footer) {
             const footerBrandP = document.querySelector('.footer-brand p');
             if (footerBrandP && cfg.footer.footer_descripcion) footerBrandP.textContent = cfg.footer.footer_descripcion;
+        }
+        if (cfg.general && cfg.general.footer_copyright) {
             const footerBottom = document.querySelector('.footer-bottom p');
-            if (footerBottom && cfg.footer.footer_copyright) footerBottom.innerHTML = cfg.footer.footer_copyright;
+            if (footerBottom) footerBottom.innerHTML = cfg.general.footer_copyright;
         }
 
         if (cfg.redes) {
