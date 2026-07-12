@@ -107,7 +107,6 @@ if (isset($_GET['logout'])) {
         <button class="admin-tab active" onclick="switchTab('productos')"><i class="fas fa-box"></i> Productos</button>
         <button class="admin-tab" onclick="switchTab('hero')"><i class="fas fa-image"></i> Hero</button>
         <button class="admin-tab" onclick="switchTab('nosotros')"><i class="fas fa-info-circle"></i> Nosotros</button>
-        <button class="admin-tab" onclick="switchTab('contacto')"><i class="fas fa-phone"></i> Contacto</button>
         <button class="admin-tab" onclick="switchTab('footer')"><i class="fas fa-shoe-prints"></i> Footer</button>
         <button class="admin-tab" onclick="switchTab('redes')"><i class="fas fa-share-alt"></i> Redes</button>
         <button class="admin-tab" onclick="switchTab('general')"><i class="fas fa-cog"></i> General</button>
@@ -208,33 +207,6 @@ if (isset($_GET['logout'])) {
             <div class="save-row">
                 <span class="save-msg" id="msg-nosotros"></span>
                 <button class="btn btn-primary" onclick="saveConfig('nosotros')"><i class="fas fa-save"></i> Guardar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- CONTACTO -->
-    <div class="tab-content" id="tab-contacto">
-        <div class="config-card">
-            <h3><i class="fas fa-phone"></i> Sección Contacto</h3>
-            <div class="form-group">
-                <label>Ubicación</label>
-                <input type="text" id="cfg_contacto_ubicacion">
-            </div>
-            <div class="form-group">
-                <label>Teléfono</label>
-                <input type="text" id="cfg_contacto_telefono">
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="cfg_contacto_email">
-            </div>
-            <div class="form-group">
-                <label>Horario</label>
-                <input type="text" id="cfg_contacto_horario">
-            </div>
-            <div class="save-row">
-                <span class="save-msg" id="msg-contacto"></span>
-                <button class="btn btn-primary" onclick="saveConfig('contacto')"><i class="fas fa-save"></i> Guardar</button>
             </div>
         </div>
     </div>
@@ -618,12 +590,6 @@ async function loadAllConfig() {
             document.getElementById('cfg_nosotros_titulo').value = cfg.nosotros.nosotros_titulo || '';
             document.getElementById('cfg_nosotros_texto1').value = cfg.nosotros.nosotros_texto1 || '';
             document.getElementById('cfg_nosotros_texto2').value = cfg.nosotros.nosotros_texto2 || '';
-        }
-        if (cfg.contacto) {
-            document.getElementById('cfg_contacto_ubicacion').value = cfg.contacto.contacto_ubicacion || '';
-            document.getElementById('cfg_contacto_telefono').value = cfg.contacto.contacto_telefono || '';
-            document.getElementById('cfg_contacto_email').value = cfg.contacto.contacto_email || '';
-            document.getElementById('cfg_contacto_horario').value = cfg.contacto.contacto_horario || '';
         }
         if (cfg.footer) {
             document.getElementById('cfg_footer_footer_descripcion').value = cfg.footer.footer_descripcion || '';
