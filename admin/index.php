@@ -579,7 +579,7 @@ async function loadAllConfig() {
         }
         if (cfg.general) {
             document.getElementById('cfg_general_site_nombre').value = cfg.general.site_nombre || '';
-            document.getElementById('cfg_general_footer_copyright').value = cfg.general.footer_copyright || '';
+            document.getElementById('cfg_general_footer_copyright').value = cfg.general.footer_copyright || (cfg.footer ? cfg.footer.footer_copyright : '') || '';
             document.getElementById('cfg_general_logo_icon').value = cfg.general.logo_icon || '';
             document.getElementById('cfg_general_btn_primary').value = cfg.general.btn_primary || '';
             document.getElementById('cfg_general_logo_tipo').value = cfg.general.logo_tipo || 'icon';
