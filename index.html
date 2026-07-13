@@ -7,8 +7,12 @@
     <meta name="description" content="Bombones de chocolate artesanales, calidad premium. Descubre nuestra selección de chocolates finos.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { opacity: 0; transition: opacity 0.3s; }
+        body.loaded { opacity: 1; }
+    </style>
 </head>
-<body>
+<body onload="document.body.classList.add('loaded')">
 
     <!-- Header -->
     <header class="header">
