@@ -304,7 +304,7 @@ function crearCard(producto) {
                 <h3>${producto.nombre}</h3>
                 <p class="product-desc">${producto.descripcion || ''}</p>
                 <div class="product-precio">
-                    ${esConvenir ? '<span class="precio-convenir">Precio a convenir</span>' : `<span class="precio-actual">${MONEDA}${(tieneOferta ? producto.precio_oferta : producto.precio).toLocaleString('es-CL')}</span>`}
+                    ${esConvenir ? '<span class="precio-convenir">Para información de precios contacte al vendedor</span>' : `<span class="precio-actual">${MONEDA}${(tieneOferta ? producto.precio_oferta : producto.precio).toLocaleString('es-CL')}</span>`}
                     ${!esConvenir && tieneOferta ? `<span class="precio-oferta">${MONEDA}${producto.precio.toLocaleString('es-CL')}</span>` : ''}
                     ${!esConvenir && tieneOferta ? `<span class="precio-descuento">-${descuento}%</span>` : ''}
                 </div>
@@ -346,7 +346,7 @@ async function verDetalle(id) {
                         <h2 style="font-size:1.5rem;color:var(--color-primary);margin-bottom:10px;">${p.nombre}</h2>
                         <p style="color:var(--color-text-light);margin-bottom:20px;line-height:1.7;">${p.descripcion || 'Sin descripción disponible.'}</p>
                         <div class="product-precio" style="margin-bottom:20px;">
-                            ${esConvenir ? '<span class="precio-convenir" style="font-size:1.5rem;">Precio a convenir</span>' : `<span class="precio-actual" style="font-size:1.8rem;">${MONEDA}${(tieneOferta ? p.precio_oferta : p.precio).toLocaleString('es-CL')}</span>`}
+                            ${esConvenir ? '<span class="precio-convenir" style="font-size:1.5rem;">Para información de precios contacte al vendedor</span>' : `<span class="precio-actual" style="font-size:1.8rem;">${MONEDA}${(tieneOferta ? p.precio_oferta : p.precio).toLocaleString('es-CL')}</span>`}
                             ${!esConvenir && tieneOferta ? `<span class="precio-oferta" style="font-size:1.2rem;">${MONEDA}${p.precio.toLocaleString('es-CL')}</span>` : ''}
                             ${!esConvenir && tieneOferta ? `<span class="precio-descuento" style="font-size:0.9rem;">-${descuento}%</span>` : ''}
                         </div>
