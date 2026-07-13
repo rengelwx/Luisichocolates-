@@ -482,7 +482,7 @@ if (isset($_GET['logout'])) {
                 <div class="form-group form-group-checkbox">
                     <label>
                         <input type="checkbox" name="precio_a_convenir" id="f_precio_a_convenir" value="1" onchange="togglePrecio()">
-                        Para más información contacte al vendedor
+                        Para información de precios contacte al vendedor
                     </label>
                 </div>
                 <div class="form-group">
