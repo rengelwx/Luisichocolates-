@@ -117,10 +117,10 @@ async function loadSiteConfig() {
             const valorIcons = document.querySelectorAll('.valor i');
             const valorTitles = document.querySelectorAll('.valor h4');
             for (let i = 0; i < 3; i++) {
-                const iconKey = 'valores_icono' + (i + 1);
-                const titleKey = 'valores_titulo' + (i + 1);
-                if (valorIcons[i] && cfg.valores[iconKey]) valorIcons[i].className = 'fas ' + cfg.valores[iconKey];
-                if (valorTitles[i] && cfg.valores[titleKey]) valorTitles[i].textContent = cfg.valores[titleKey];
+                const iconVal = cfg.valores['icono' + (i + 1)] || cfg.valores['valores_icono' + (i + 1)] || '';
+                const titleVal = cfg.valores['titulo' + (i + 1)] || cfg.valores['valores_titulo' + (i + 1)] || '';
+                if (valorIcons[i] && iconVal) valorIcons[i].className = 'fas ' + iconVal;
+                if (valorTitles[i] && titleVal) valorTitles[i].textContent = titleVal;
             }
         }
 

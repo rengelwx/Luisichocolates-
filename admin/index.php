@@ -595,8 +595,8 @@ async function loadAllConfig() {
             for (let i = 1; i <= 3; i++) {
                 const icono = document.getElementById('cfg_valores_icono' + i);
                 const titulo = document.getElementById('cfg_valores_titulo' + i);
-                if (icono) icono.value = cfg.valores['valores_icono' + i] || '';
-                if (titulo) titulo.value = cfg.valores['valores_titulo' + i] || '';
+                if (icono) icono.value = cfg.valores['icono' + i] || cfg.valores['valores_icono' + i] || '';
+                if (titulo) titulo.value = cfg.valores['titulo' + i] || cfg.valores['valores_titulo' + i] || '';
             }
         }
         if (cfg.slider) {
