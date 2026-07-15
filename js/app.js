@@ -111,6 +111,9 @@ async function loadSiteConfig() {
             const paragraphs = document.querySelectorAll('#nosotros .nosotros-content p');
             if (paragraphs[0] && cfg.nosotros.nosotros_texto1) paragraphs[0].textContent = cfg.nosotros.nosotros_texto1;
             if (paragraphs[1] && cfg.nosotros.nosotros_texto2) paragraphs[1].textContent = cfg.nosotros.nosotros_texto2;
+            const imgEl = document.querySelector('#nosotros .nosotros-image img');
+            const imgUrl = cfg.nosotros.nosotros_imagen_url || cfg.nosotros.nosotros_imagen || '';
+            if (imgEl && imgUrl) imgEl.src = imgUrl;
         }
 
         if (cfg.valores) {

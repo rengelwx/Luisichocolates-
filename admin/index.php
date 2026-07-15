@@ -1,4 +1,7 @@
 <?php
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Pragma: no-cache');
+header('Expires: Thu, 01 Jan 1970 00:00:00 GMT');
 require_once __DIR__ . '/../config.php';
 
 $auth_error = '';
@@ -38,7 +41,7 @@ if (isset($_GET['logout'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - LUISICHOCOLATES</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css?v=<?= time() ?>">
     <style>
         .admin-tabs { display:flex; gap:0; background:var(--color-bg-gray); border-radius:var(--radius-sm); overflow:hidden; margin-bottom:30px; flex-wrap:wrap; }
         .admin-tab { padding:12px 22px; cursor:pointer; font-weight:600; font-size:0.88rem; color:var(--color-text-light); border:none; background:transparent; transition:all 0.2s; white-space:nowrap; }
@@ -191,6 +194,12 @@ if (isset($_GET['logout'])) {
     <div class="tab-content" id="tab-nosotros">
         <div class="config-card">
             <h3><i class="fas fa-info-circle"></i> Sección Nosotros</h3>
+            <div class="form-group">
+                <label>Imagen</label>
+                <input type="file" id="cfg_nosotros_imagen" accept="image/*" onchange="uploadNosotrosImagen(this)">
+                <input type="text" id="cfg_nosotros_imagen_url" placeholder="O pega URL directa" style="margin-top:8px;">
+                <div id="nosotrosImagenPreview" style="margin-top:10px;max-width:200px;"></div>
+            </div>
             <div class="form-group">
                 <label>Título</label>
                 <input type="text" id="cfg_nosotros_titulo">
@@ -570,6 +579,11 @@ async function loadAllConfig() {
             document.getElementById('cfg_nosotros_titulo').value = cfg.nosotros.nosotros_titulo || '';
             document.getElementById('cfg_nosotros_texto1').value = cfg.nosotros.nosotros_texto1 || '';
             document.getElementById('cfg_nosotros_texto2').value = cfg.nosotros.nosotros_texto2 || '';
+            const imgUrl = cfg.nosotros.nosotros_imagen_url || cfg.nosotros.nosotros_imagen || '';
+            if (imgUrl) {
+                document.getElementById('cfg_nosotros_imagen_url').value = imgUrl;
+                document.getElementById('nosotrosImagenPreview').innerHTML = '<img src="' + imgUrl + '" style="width:100%;border-radius:8px;">';
+            }
         }
         if (cfg.redes) {
             document.getElementById('cfg_redes_redes_facebook').value = cfg.redes.redes_facebook || '';
@@ -646,7 +660,8 @@ async function saveConfig(section) {
     let ok = true;
 
     for (const field of fields) {
-        const key = field.id.replace('cfg_' + section + '_', '');
+        const rawKey = field.id.replace('cfg_' + section + '_', '');
+        const key = rawKey.startsWith(section + '_') ? rawKey : section + '_' + rawKey;
         const value = field.value;
         try {
             const res = await fetch(API_UPDATE, {
@@ -1016,6 +1031,24 @@ async function uploadSliderImage(input) {
         const data = await res.json();
         if (data.filename) {
             document.getElementById('newSliderUrl').value = '/uploads/' + data.filename;
+        }
+    } catch(e) {
+        console.error(e);
+    }
+    input.value = '';
+}
+
+async function uploadNosotrosImagen(input) {
+    if (!input.files.length) return;
+    const formData = new FormData();
+    formData.append('imagen', input.files[0]);
+    try {
+        const res = await fetch('../api/upload.php', { method: 'POST', body: formData });
+        const data = await res.json();
+        if (data.filename) {
+            const url = '/uploads/' + data.filename;
+            document.getElementById('cfg_nosotros_imagen_url').value = url;
+            document.getElementById('nosotrosImagenPreview').innerHTML = '<img src="' + url + '" style="width:100%;border-radius:8px;">';
         }
     } catch(e) {
         console.error(e);

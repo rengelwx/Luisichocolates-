@@ -17,8 +17,8 @@ $key = $input['key'];
 $value = $input['value'];
 
 $db = new DB();
-$stmt = $db->prepare("INSERT INTO site_config (section, `key`, value) VALUES (:section, :key, :value)
-    ON CONFLICT(section, `key`) DO UPDATE SET value = :value2");
+$stmt = $db->prepare('INSERT INTO site_config (section, "key", value) VALUES (:section, :key, :value)
+    ON CONFLICT(section, "key") DO UPDATE SET value = :value2');
 $stmt->bindValue(':section', $section);
 $stmt->bindValue(':key', $key);
 $stmt->bindValue(':value', $value);
