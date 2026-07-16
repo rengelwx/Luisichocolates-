@@ -284,7 +284,7 @@ async function cargarTodosProductos(search = '', categoria = '', append = false)
 function contactarWhatsApp(nombre) {
     const url = window._whatsappUrl || 'https://wa.me/525512345678';
     const baseUrl = url.replace(/\?.*$/, '');
-    const msg = encodeURIComponent(`Hola! Me interesa el producto: ${nombre}`);
+    const msg = encodeURIComponent(`Hola! Me contacto desde su pagina web. Me interesa el producto: ${nombre}`);
     window.open(`${baseUrl}?text=${msg}`, '_blank');
 }
 
