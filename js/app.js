@@ -281,11 +281,15 @@ async function cargarTodosProductos(search = '', categoria = '', append = false)
     }
 }
 
-function contactarWhatsApp(nombre) {
+function contactarWhatsApp(nombre, imagen) {
     const url = window._whatsappUrl || 'https://wa.me/525512345678';
     const baseUrl = url.replace(/\?.*$/, '');
-    const msg = encodeURIComponent(`Hola! Me contacto desde su pagina web. Me interesa el producto: ${nombre}`);
-    window.open(`${baseUrl}?text=${msg}`, '_blank');
+    let msg = `Hola! Me contacto desde su pagina web. Me interesa el producto: ${nombre}`;
+    if (imagen) {
+        const imgUrl = new URL('uploads/' + imagen, document.baseURI).href;
+        msg += `\nPuedes ver el producto en esta imagen: ${imgUrl}`;
+    }
+    window.open(`${baseUrl}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
 function crearCard(producto) {
@@ -312,7 +316,7 @@ function crearCard(producto) {
                     ${!esConvenir && tieneOferta ? `<span class="precio-descuento">-${descuento}%</span>` : ''}
                 </div>
                 <div class="product-actions">
-                    <button class="btn-whatsapp" onclick="contactarWhatsApp('${producto.nombre.replace(/'/g, "\\'")}')">
+                    <button class="btn-whatsapp" onclick="contactarWhatsApp('${producto.nombre.replace(/'/g, "\\'")}', '${producto.imagen || ''}')">
                         <i class="fab fa-whatsapp"></i> Contactar
                     </button>
                     <button class="btn-detail" onclick="verDetalle(${producto.id})">
@@ -353,7 +357,7 @@ async function verDetalle(id) {
                             ${!esConvenir && tieneOferta ? `<span class="precio-oferta" style="font-size:1.2rem;">${MONEDA}${p.precio.toLocaleString('es-CL')}</span>` : ''}
                             ${!esConvenir && tieneOferta ? `<span class="precio-descuento" style="font-size:0.9rem;">-${descuento}%</span>` : ''}
                         </div>
-                        <button class="btn btn-whatsapp-lg" onclick="contactarWhatsApp('${p.nombre.replace(/'/g, "\\'")}'); this.closest('.modal-overlay').remove();">
+                        <button class="btn btn-whatsapp-lg" onclick="contactarWhatsApp('${p.nombre.replace(/'/g, "\\'")}', '${p.imagen || ''}'); this.closest('.modal-overlay').remove();">
                             <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
                         </button>
                     </div>
