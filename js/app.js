@@ -87,22 +87,7 @@ async function loadSiteConfig() {
             const heroP = document.querySelector('.hero-content > p');
             if (heroP && cfg.hero.hero_descripcion) heroP.textContent = cfg.hero.hero_descripcion;
 
-            const opacidad = parseInt(cfg.hero.hero_overlay_opacity) / 10;
-            const color = cfg.hero.hero_overlay_color || '#FFF9F3';
-            const r = parseInt(color.slice(1,3), 16);
-            const g = parseInt(color.slice(3,5), 16);
-            const b = parseInt(color.slice(5,7), 16);
-            let styleTag = document.getElementById('hero-overlay-style');
-            if (!styleTag) {
-                styleTag = document.createElement('style');
-                styleTag.id = 'hero-overlay-style';
-                document.head.appendChild(styleTag);
-            }
-            styleTag.textContent = `
-                .hero-slider .slide::after {
-                    background: linear-gradient(135deg, rgba(${r},${g},${b},${opacidad}) 0%, rgba(${r},${g},${b},${opacidad * 0.85}) 100%) !important;
-                }
-            `;
+            /* Overlay desactivado - solo fotos en el slider */
         }
 
         if (cfg.nosotros) {
@@ -384,23 +369,18 @@ async function initSlider() {
         if (!sliderImages.length) return;
 
         const container = document.getElementById('heroSlider');
-        const dotsContainer = document.getElementById('sliderDots');
         if (!container) return;
 
         container.innerHTML = sliderImages.map((img, i) =>
-            `<div class="slide ${i === 0 ? 'active' : ''}" style="background-image:url('${img.imagen}')"></div>`
+            `<div class="slide ${i === 0 ? 'active' : ''}"><img src="${img.imagen}" alt="Slide"></div>`
         ).join('');
 
-        if (dotsContainer) {
-            dotsContainer.innerHTML = sliderImages.map((img, i) =>
-                `<div class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></div>`
-            ).join('');
-            dotsContainer.querySelectorAll('.dot').forEach(dot => {
-                dot.addEventListener('click', () => {
-                    goToSlide(parseInt(dot.dataset.index));
-                });
-            });
-        }
+        document.getElementById('sliderPrev').addEventListener('click', () => {
+            goToSlide(sliderIndex - 1);
+        });
+        document.getElementById('sliderNext').addEventListener('click', () => {
+            goToSlide(sliderIndex + 1);
+        });
 
         let cfgRes = await fetch(API.config);
         let cfg = await cfgRes.json();
@@ -418,11 +398,9 @@ function nextSlide() {
 
 function goToSlide(index) {
     const slides = document.querySelectorAll('#heroSlider .slide');
-    const dots = document.querySelectorAll('#sliderDots .dot');
     if (!slides.length) return;
 
     sliderIndex = ((index % slides.length) + slides.length) % slides.length;
 
     slides.forEach((s, i) => s.classList.toggle('active', i === sliderIndex));
-    dots.forEach((d, i) => d.classList.toggle('active', i === sliderIndex));
 }
