@@ -1077,9 +1077,8 @@ a {
     }
 
     .hero {
-        height: auto;
+        height: 250px;
         margin-top: 60px;
-        aspect-ratio: 1920 / 596;
     }
 
     .hero-slider .slide img {
