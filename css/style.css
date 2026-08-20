@@ -1077,8 +1077,9 @@ a {
     }
 
     .hero {
-        height: 250px;
+        height: 140px;
         margin-top: 10px;
+        margin-bottom: 0;
     }
 
     .hero-slider .slide img {
@@ -1089,11 +1090,11 @@ a {
     }
 
     .section {
-        padding: 10px 0;
+        padding: 15px 0 5px !important;
     }
 
     .section-header {
-        margin-bottom: 15px;
+        margin-bottom: 10px !important;
     }
 
     .hero-buttons .btn {
