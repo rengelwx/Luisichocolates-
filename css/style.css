@@ -1088,6 +1088,14 @@ a {
         background: #ffffff;
     }
 
+    .section {
+        padding: 40px 0;
+    }
+
+    .section-header {
+        margin-bottom: 25px;
+    }
+
     .hero-buttons .btn {
         text-align: center;
         width: 100%;
