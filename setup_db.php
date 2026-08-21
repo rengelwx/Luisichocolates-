@@ -8,6 +8,7 @@ $db->exec("CREATE TABLE IF NOT EXISTS categorias (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre TEXT NOT NULL,
     slug TEXT NOT NULL UNIQUE,
+    orden INTEGER DEFAULT 0,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 )");
 
@@ -50,6 +51,13 @@ $categorias = [
     ['Trufas', 'trufas'],
     ['Ediciones Especiales', 'ediciones-especiales'],
 ];
+
+// Migración: agregar columna orden si no existe
+try {
+    $db->exec("ALTER TABLE categorias ADD COLUMN orden INTEGER DEFAULT 0");
+} catch (\Throwable $e) {
+    // Columna ya existe, ignorar error
+}
 
 foreach ($categorias as $cat) {
     $exists = $db->querySingle("SELECT id FROM categorias WHERE slug = '{$cat[1]}'");
