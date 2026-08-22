@@ -1146,16 +1146,13 @@ a {
     .categoria-filtros {
         width: 100%;
         justify-content: flex-start;
-        overflow-x: auto;
-        flex-wrap: nowrap;
-        padding-bottom: 8px;
-        -webkit-overflow-scrolling: touch;
+        flex-wrap: wrap;
+        gap: 8px;
     }
 
     .filtro-btn {
         padding: 8px 16px;
         font-size: 0.8rem;
-        flex-shrink: 0;
     }
 
     .product-actions {
