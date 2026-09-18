@@ -353,8 +353,8 @@ async function verDetalle(id) {
             if (e.target === overlay) cerrarDetalle();
         });
 
-        history.pushState({ modal: 'detalle' }, '');
-        window.addEventListener('popstate', cerrarDetalleOnPop);
+        window.location.hash = 'detalle';
+        window.addEventListener('hashchange', cerrarDetalleOnHash);
     } catch (e) {
         console.error('Error al cargar detalle:', e);
     }
@@ -363,13 +363,18 @@ async function verDetalle(id) {
 function cerrarDetalle() {
     const overlay = document.querySelector('.modal-overlay.open');
     if (overlay) overlay.remove();
-    window.removeEventListener('popstate', cerrarDetalleOnPop);
+    window.removeEventListener('hashchange', cerrarDetalleOnHash);
+    if (window.location.hash === '#detalle') {
+        history.back();
+    }
 }
 
-function cerrarDetalleOnPop() {
-    const overlay = document.querySelector('.modal-overlay.open');
-    if (overlay) overlay.remove();
-    window.removeEventListener('popstate', cerrarDetalleOnPop);
+function cerrarDetalleOnHash() {
+    if (window.location.hash !== '#detalle') {
+        const overlay = document.querySelector('.modal-overlay.open');
+        if (overlay) overlay.remove();
+        window.removeEventListener('hashchange', cerrarDetalleOnHash);
+    }
 }
 
 let sliderTimer = null;
