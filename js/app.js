@@ -327,7 +327,7 @@ async function verDetalle(id) {
         overlay.className = 'modal-overlay open';
         overlay.innerHTML = `
             <div class="modal modal-detail">
-                <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">&times;</button>
+                <button class="modal-close" onclick="cerrarDetalle()">&times;</button>
                 <div class="modal-body modal-detail-grid">
                     <div class="modal-detail-img">
                         ${imagen}
@@ -341,7 +341,7 @@ async function verDetalle(id) {
                             ${!esConvenir && tieneOferta ? `<span class="precio-oferta">${MONEDA}${p.precio.toLocaleString('es-CL')}</span>` : ''}
                             ${!esConvenir && tieneOferta ? `<span class="precio-descuento">-${descuento}%</span>` : ''}
                         </div>
-                        <button class="btn btn-whatsapp-lg" onclick="contactarWhatsApp('${p.nombre.replace(/'/g, "\\'")}', '${p.imagen || ''}'); this.closest('.modal-overlay').remove();">
+                        <button class="btn btn-whatsapp-lg" onclick="contactarWhatsApp('${p.nombre.replace(/'/g, "\\'")}', '${p.imagen || ''}'); cerrarDetalle();">
                             <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
                         </button>
                     </div>
@@ -350,11 +350,26 @@ async function verDetalle(id) {
         `;
         document.body.appendChild(overlay);
         overlay.addEventListener('click', (e) => {
-            if (e.target === overlay) overlay.remove();
+            if (e.target === overlay) cerrarDetalle();
         });
+
+        history.pushState({ modal: 'detalle' }, '');
+        window.addEventListener('popstate', cerrarDetalleOnPop);
     } catch (e) {
         console.error('Error al cargar detalle:', e);
     }
+}
+
+function cerrarDetalle() {
+    const overlay = document.querySelector('.modal-overlay.open');
+    if (overlay) overlay.remove();
+    window.removeEventListener('popstate', cerrarDetalleOnPop);
+}
+
+function cerrarDetalleOnPop() {
+    const overlay = document.querySelector('.modal-overlay.open');
+    if (overlay) overlay.remove();
+    window.removeEventListener('popstate', cerrarDetalleOnPop);
 }
 
 let sliderTimer = null;
