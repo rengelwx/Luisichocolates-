@@ -838,6 +838,88 @@ a {
     border-radius: var(--radius-sm);
 }
 
+.modal-detail {
+    max-width: 1200px;
+    width: 95%;
+    max-height: 90vh;
+    padding: 0;
+    overflow: hidden;
+}
+
+.modal-detail .modal-close {
+    top: 12px;
+    right: 14px;
+    z-index: 10;
+    background: rgba(255,255,255,0.85);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+.modal-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-height: 90vh;
+}
+
+.modal-detail-img {
+    background: var(--color-bg-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow: hidden;
+    max-height: 90vh;
+}
+
+.modal-detail-img img {
+    max-height: 85vh;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
+}
+
+.modal-detail-info {
+    padding: 36px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+    max-height: 90vh;
+}
+
+.modal-detail-info h2 {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    margin: 0;
+}
+
+.modal-detail-desc {
+    color: var(--color-text-light);
+    line-height: 1.7;
+    margin: 0;
+}
+
+.modal-detail-info .product-precio {
+    margin: 8px 0;
+}
+
+.modal-detail-info .precio-actual {
+    font-size: 1.8rem;
+}
+
+.modal-detail-info .precio-convenir {
+    font-size: 1.3rem;
+}
+
+.modal-detail-info .btn-whatsapp-lg {
+    margin-top: auto;
+}
+
 /* ====================== TOAST ====================== */
 .toast {
     position: fixed;
@@ -1184,6 +1266,28 @@ a {
     .modal-body .btn-whatsapp-lg {
         width: 100%;
         text-align: center;
+    }
+
+    .modal-detail-grid {
+        grid-template-columns: 1fr;
+        max-height: 90vh;
+    }
+
+    .modal-detail-img {
+        max-height: 45vh;
+    }
+
+    .modal-detail-img img {
+        max-height: 40vh;
+    }
+
+    .modal-detail-info {
+        padding: 20px;
+        max-height: 45vh;
+    }
+
+    .modal-detail-info .precio-actual {
+        font-size: 1.5rem;
     }
 }
 

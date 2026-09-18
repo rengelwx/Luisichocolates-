@@ -287,7 +287,7 @@ function crearCard(producto) {
 
     return `
         <div class="product-card" data-id="${producto.id}">
-            <div class="image-wrapper">
+            <div class="image-wrapper" style="cursor:pointer;" onclick="verDetalle(${producto.id})">
                 ${tieneOferta ? `<span class="product-badge">-${descuento}%</span>` : ''}
                 ${imagen}
             </div>
@@ -303,9 +303,6 @@ function crearCard(producto) {
                 <div class="product-actions">
                     <button class="btn-whatsapp" onclick="contactarWhatsApp('${producto.nombre.replace(/'/g, "\\'")}', '${producto.imagen || ''}')">
                         <i class="fab fa-whatsapp"></i> Contactar
-                    </button>
-                    <button class="btn-detail" onclick="verDetalle(${producto.id})">
-                        <i class="fas fa-eye"></i>
                     </button>
                 </div>
             </div>
@@ -329,18 +326,20 @@ async function verDetalle(id) {
         const overlay = document.createElement('div');
         overlay.className = 'modal-overlay open';
         overlay.innerHTML = `
-            <div class="modal">
+            <div class="modal modal-detail">
                 <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">&times;</button>
-                <div class="modal-body">
-                    ${imagen}
-                    <div>
+                <div class="modal-body modal-detail-grid">
+                    <div class="modal-detail-img">
+                        ${imagen}
+                    </div>
+                    <div class="modal-detail-info">
                         ${p.categoria_nombre ? `<p class="product-categoria">${p.categoria_nombre}</p>` : ''}
-                        <h2 style="font-size:1.5rem;color:var(--color-primary);margin-bottom:10px;">${p.nombre}</h2>
-                        <p style="color:var(--color-text-light);margin-bottom:20px;line-height:1.7;">${p.descripcion || 'Sin descripción disponible.'}</p>
-                        <div class="product-precio" style="margin-bottom:20px;">
-                            ${esConvenir ? '<span class="precio-convenir" style="font-size:1.5rem;">Contactar al vendedor para precios</span>' : `<span class="precio-actual" style="font-size:1.8rem;">${MONEDA}${(tieneOferta ? p.precio_oferta : p.precio).toLocaleString('es-CL')}</span>`}
-                            ${!esConvenir && tieneOferta ? `<span class="precio-oferta" style="font-size:1.2rem;">${MONEDA}${p.precio.toLocaleString('es-CL')}</span>` : ''}
-                            ${!esConvenir && tieneOferta ? `<span class="precio-descuento" style="font-size:0.9rem;">-${descuento}%</span>` : ''}
+                        <h2>${p.nombre}</h2>
+                        <p class="modal-detail-desc">${p.descripcion || 'Sin descripción disponible.'}</p>
+                        <div class="product-precio">
+                            ${esConvenir ? '<span class="precio-convenir">Contactar al vendedor para precios</span>' : `<span class="precio-actual">${MONEDA}${(tieneOferta ? p.precio_oferta : p.precio).toLocaleString('es-CL')}</span>`}
+                            ${!esConvenir && tieneOferta ? `<span class="precio-oferta">${MONEDA}${p.precio.toLocaleString('es-CL')}</span>` : ''}
+                            ${!esConvenir && tieneOferta ? `<span class="precio-descuento">-${descuento}%</span>` : ''}
                         </div>
                         <button class="btn btn-whatsapp-lg" onclick="contactarWhatsApp('${p.nombre.replace(/'/g, "\\'")}', '${p.imagen || ''}'); this.closest('.modal-overlay').remove();">
                             <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
