@@ -723,6 +723,7 @@ function abrirFormulario() {
     document.getElementById('modalTitle').textContent = 'Nuevo Producto';
     document.getElementById('productoForm').reset();
     document.getElementById('productoId').value = '';
+    document.getElementById('f_imagen').value = '';
     document.getElementById('f_activo').checked = true;
     document.getElementById('f_precio_a_convenir').checked = false;
     togglePrecio();
@@ -733,6 +734,7 @@ function abrirFormularioParaCategoria(catId) {
     document.getElementById('modalTitle').textContent = 'Nuevo Producto';
     document.getElementById('productoForm').reset();
     document.getElementById('productoId').value = '';
+    document.getElementById('f_imagen').value = '';
     document.getElementById('f_activo').checked = true;
     document.getElementById('f_precio_a_convenir').checked = false;
     togglePrecio();
@@ -773,6 +775,7 @@ async function editarProducto(id) {
         document.getElementById('f_destacado').checked = p.destacado == 1;
         document.getElementById('f_activo').checked = p.activo == 1;
         document.getElementById('f_imagen_hidden').value = p.imagen || '';
+        document.getElementById('f_imagen').value = '';
         togglePrecio();
         await cargarSelectCategorias(p.categoria_id);
         abrirModal();
