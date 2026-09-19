@@ -1271,10 +1271,12 @@ a {
     .modal-detail-grid {
         grid-template-columns: 1fr;
         max-height: 90vh;
+        overflow-y: auto;
     }
 
     .modal-detail-img {
         max-height: 45vh;
+        flex-shrink: 0;
     }
 
     .modal-detail-img img {
@@ -1283,7 +1285,14 @@ a {
 
     .modal-detail-info {
         padding: 20px;
-        max-height: 45vh;
+        max-height: none;
+        flex-shrink: 0;
+    }
+
+    .modal-detail-info .btn-whatsapp-lg {
+        width: 100%;
+        flex-shrink: 0;
+        margin-top: 16px;
     }
 
     .modal-detail-info .precio-actual {
