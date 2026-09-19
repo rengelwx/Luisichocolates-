@@ -349,6 +349,7 @@ async function verDetalle(id) {
             </div>
         `;
         document.body.appendChild(overlay);
+        document.body.style.overflow = 'hidden';
         overlay.addEventListener('click', (e) => {
             if (e.target === overlay) cerrarDetalle();
         });
@@ -363,6 +364,7 @@ async function verDetalle(id) {
 function cerrarDetalle() {
     const overlay = document.querySelector('.modal-overlay.open');
     if (overlay) overlay.remove();
+    document.body.style.overflow = '';
     window.removeEventListener('hashchange', cerrarDetalleOnHash);
     if (window.location.hash === '#detalle') {
         history.back();
@@ -373,6 +375,7 @@ function cerrarDetalleOnHash() {
     if (window.location.hash !== '#detalle') {
         const overlay = document.querySelector('.modal-overlay.open');
         if (overlay) overlay.remove();
+        document.body.style.overflow = '';
         window.removeEventListener('hashchange', cerrarDetalleOnHash);
     }
 }
