@@ -215,7 +215,7 @@ let currentCategoria = '';
 
 async function cargarProductosDestacados() {
     try {
-        const res = await fetch(`${API.productos}?destacado=1&limit=3`);
+        const res = await fetch(`${API.productos}?destacado=1&limit=4`);
         const data = await res.json();
         const productos = Array.isArray(data) ? data : (data.productos || []);
         const grid = document.getElementById('productosDestacados');

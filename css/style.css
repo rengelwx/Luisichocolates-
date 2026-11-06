@@ -322,6 +322,13 @@ a {
     gap: 30px;
 }
 
+/* Destacados: 4 en fila en pantallas grandes */
+@media (min-width: 1024px) {
+    #productosDestacados {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
 .product-card {
     background: var(--color-white);
     border-radius: var(--radius);
